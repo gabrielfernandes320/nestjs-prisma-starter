@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
+import { PrismaService } from './services/PrismaService';
 
 @Module({
     imports: [
@@ -25,6 +26,6 @@ import { join } from 'path';
         }),
     ],
     controllers: [],
-    providers: [],
+    providers: [PrismaService],
 })
 export class DatabaseModule {}

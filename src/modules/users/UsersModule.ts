@@ -9,9 +9,11 @@ import ShowUserService from './services/ShowUserService';
 import CreateUserService from './services/CreateUserService';
 import ListUserService from './services/ListUserService';
 import DeleteUserService from './services/DeleteUserService';
+import { DatabaseModule } from '../database/DatabaseModule';
+import { PrismaService } from '../database/services/PrismaService';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User])],
+    imports: [TypeOrmModule.forFeature([User]), DatabaseModule],
     providers: [
         ...[
             ShowUserService,
@@ -20,6 +22,7 @@ import DeleteUserService from './services/DeleteUserService';
             ListUserService,
             DeleteUserService,
             ShowUserByEmailService,
+            PrismaService,
         ],
         ...providers,
     ],
