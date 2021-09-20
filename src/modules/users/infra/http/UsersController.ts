@@ -10,7 +10,7 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { TransformClassToPlain } from 'class-transformer';
+import { plainToClass, TransformClassToPlain } from 'class-transformer';
 import { Permissions } from '../../../auth/decorators/PermissionsDecorator';
 import { UserPermissions } from '../../../auth/enums/permissions';
 import JwtAuthenticationGuard from '../../../auth/guards/JwtAuthenticationGuard';
@@ -40,6 +40,7 @@ export class UsersController {
     ) {}
 
     @Permissions(UserPermissions.Create)
+    @UseGuards(PermissionsGuard)
     @Post()
     public async create(@Body() createUserDto: CreateUserDTO) {
         return await this.createUserService.execute(createUserDto);
@@ -53,6 +54,7 @@ export class UsersController {
     }
 
     @Permissions(UserPermissions.Show)
+    @UseGuards(PermissionsGuard)
     @Get(':id')
     @TransformClassToPlain()
     public async findOne(@Param('id') id: number) {
@@ -60,6 +62,7 @@ export class UsersController {
     }
 
     @Permissions(UserPermissions.Update)
+    @UseGuards(PermissionsGuard)
     @Patch(':id')
     public async update(
         @Param('id') id: number,
@@ -69,6 +72,7 @@ export class UsersController {
     }
 
     @Permissions(UserPermissions.Delete)
+    @UseGuards(PermissionsGuard)
     @Delete(':id')
     public async remove(@Param('id') id: number) {
         return await this.deleteUserService.execute(id);

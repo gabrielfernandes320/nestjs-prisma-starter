@@ -9,16 +9,13 @@ import ChangePasswordDTO from '../dtos/ChangePasswordDTO';
 import InvalidTokenException from '../exceptions/InvalidTokenException';
 import CreateUserDTO from '../../users/dtos/CreateUserDTO';
 import UpdateUserDTO from '../../users/dtos/UpdateUserDTO';
-import { User } from '../../users/infra/typeorm/entities/UserEntity';
 import UserNotFoundException from '../../users/exceptions/UserNotFoundException';
 
 @Injectable()
 export default class LoginService {
     public constructor(
-        private configService: ConfigService,
         @Inject('UsersRepository')
         private usersRepository: IUsersRepository,
-        private validateUserService: ValidateUserService,
         private jwtService: JwtService,
     ) {}
 
@@ -37,9 +34,6 @@ export default class LoginService {
 
         user.password = changePassword.password;
 
-        return await this.usersRepository.update(
-            user.id,
-            plainToClass(User, user),
-        );
+        return await this.usersRepository.update(user.id, user);
     }
 }

@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 export default class CreateUserDTO {
     @IsNotEmpty()
     @ApiProperty()
-    public name: string | number;
+    public name: string;
 
     @IsNotEmpty()
     @IsEmail()
@@ -13,7 +13,7 @@ export default class CreateUserDTO {
 
     @IsNotEmpty()
     @ApiProperty({ example: [{ id: 1 }] })
-    public roles: { id: string }[];
+    public roles: [{ id: number }];
 
     @IsNotEmpty()
     @ApiProperty()

@@ -23,7 +23,7 @@ export class PermissionsRepository
 
         const [result, total] = await this.permissionsRepository.findAndCount({
             where: { name: ILike(`%${search ?? ''}%`) },
-            order: { id: order },
+            order: { id: 'ASC' },
             take: perPage,
             skip: perPage * (page - 1),
         });

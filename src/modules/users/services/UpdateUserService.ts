@@ -1,8 +1,8 @@
 import { plainToClass } from 'class-transformer';
 import UpdateUserDTO from '../dtos/UpdateUserDTO';
 import { Inject, Injectable } from '@nestjs/common';
-import { User } from '../infra/typeorm/entities/UserEntity';
 import IUsersRepository from '../repositories/IUsersRepository';
+import { User } from '@prisma/client';
 
 @Injectable()
 export default class UpdateUserService {
@@ -15,6 +15,6 @@ export default class UpdateUserService {
             user.password = undefined;
         }
 
-        return await this.usersRepository.update(id, plainToClass(User, user));
+        return await this.usersRepository.update(id, user);
     }
 }

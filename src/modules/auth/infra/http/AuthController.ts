@@ -22,9 +22,9 @@ import ForgotPasswordDTO from '../../dtos/ForgotPasswordDTO';
 import ChangePasswordDTO from '../../dtos/ChangePasswordDTO';
 import ChangePasswordService from '../../services/ChangePasswordService';
 import JwtRefreshTokenGuard from '../../guards/JwtRefreshTokenGuard';
-import { User } from '../../../users/infra/typeorm/entities/UserEntity';
 import GenerateCookieService from '../../services/GenerateCookieService';
 import { CookieType } from '../../enums/CookieTypeEnum';
+import { User } from '@prisma/client';
 
 @ApiTags('Auth')
 @Controller({

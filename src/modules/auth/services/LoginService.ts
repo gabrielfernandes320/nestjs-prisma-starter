@@ -4,7 +4,7 @@ import ValidateUserService from './ValidateUserService';
 import GenerateCookieService from './GenerateCookieService';
 import { CookieType } from '../enums/CookieTypeEnum';
 import ShowUserByEmailService from '../../users/services/ShowUserByEmailService';
-import { User } from '../../users/infra/typeorm/entities/UserEntity';
+import { User } from '@prisma/client';
 
 @Injectable()
 export default class LoginService {

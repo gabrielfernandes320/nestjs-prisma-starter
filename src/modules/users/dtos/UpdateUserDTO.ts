@@ -4,9 +4,10 @@ export default class UpdateUserDTO {
     @IsNumber()
     @IsNotEmpty()
     public id: number;
+
     @IsNotEmpty() public name?: string;
     @IsNotEmpty() public email?: string;
-    @IsOptional() public roles?: { id: string }[];
+    @IsOptional() public roles?: any;
     @IsNotEmpty() public enabled: boolean;
     @IsOptional() public password?: string;
     @IsOptional() public createdAt: Date;

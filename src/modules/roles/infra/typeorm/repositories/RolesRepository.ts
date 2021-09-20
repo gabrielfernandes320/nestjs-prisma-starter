@@ -13,7 +13,8 @@ import { BaseRepository } from '../../../../../shared/infra/typeorm/repositories
 @Injectable()
 export class RolesRepository
     extends BaseRepository(Role)
-    implements IRolesRepository {
+    implements IRolesRepository
+{
     public constructor(
         @InjectRepository(Role)
         private rolesRepository: Repository<Role>,
@@ -26,7 +27,7 @@ export class RolesRepository
 
         const [result, total] = await this.rolesRepository.findAndCount({
             where: { name: ILike(`%${search ?? ''}%`) },
-            order: { id: order },
+            order: { id: 'ASC' },
             take: perPage,
             skip: perPage * (page - 1),
             relations: ['permissions'],

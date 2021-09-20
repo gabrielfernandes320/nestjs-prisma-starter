@@ -1,6 +1,15 @@
-import IBaseRepository from '../../../shared/repositories/IBaseRepository';
-import { User } from '../infra/typeorm/entities/UserEntity';
+import { User, Prisma } from '@prisma/client';
+import ListUserDTO from '../dtos/ListUserDTO';
+export default interface IUsersRepository {
+    findAll(params: ListUserDTO): Promise<any>;
 
-export default interface IUsersRepository extends IBaseRepository<User> {
+    findById(id: number): Promise<User | null>;
+
+    remove(id: number): Promise<void>;
+
+    create(data: Prisma.UserCreateInput): Promise<User>;
+
+    update(id: number, user: Prisma.UserUpdateInput): Promise<User>;
+
     findByEmail(email: string): Promise<User>;
 }

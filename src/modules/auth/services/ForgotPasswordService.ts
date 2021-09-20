@@ -5,10 +5,10 @@ import { ConfigService } from '@nestjs/config';
 import SendMailService from '../../mail/services/SendMailService';
 import { ISendMailOptions } from '@nestjs-modules/mailer';
 import ForgotPasswordDTO from '../dtos/ForgotPasswordDTO';
-import { User } from '../../users/infra/typeorm/entities/UserEntity';
 import InvalidEmailException from '../exceptions/InvalidEmailException';
 import { Template } from '../../mail/enums/TemplatesEnum';
 import AppConfigService from '../../config/services/AppConfigService';
+import { User } from '@prisma/client';
 
 @Injectable()
 export default class FogotPasswordService {
@@ -22,7 +22,7 @@ export default class FogotPasswordService {
     ) {}
 
     public async execute(forgotPasswordDto: ForgotPasswordDTO): Promise<User> {
-        const user = await this.usersRepository.findByEmail(
+        const user: any = await this.usersRepository.findByEmail(
             forgotPasswordDto.email,
         );
 

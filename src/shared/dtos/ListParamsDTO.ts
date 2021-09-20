@@ -1,15 +1,15 @@
-import { Ordering } from '../enums/Ordering';
+import { Prisma } from '@prisma/client';
 import { IsEnum, IsOptional } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export default class ListParamsDTO {
     @ApiProperty()
     @IsOptional()
-    @IsEnum(Ordering, {
-        message: `order must be a valid enum value. Valid options are: '${Ordering.ASC}' | '${Ordering.DESC}'`,
+    @IsEnum(Prisma.SortOrder, {
+        message: `order must be a valid enum value. Valid options are: '${Prisma.SortOrder.asc}' | '${Prisma.SortOrder.desc}'`,
     })
-    @ApiPropertyOptional({ enum: Ordering })
-    public order?: Ordering = Ordering.ASC;
+    @ApiPropertyOptional({ enum: Prisma.SortOrder })
+    public order?: Prisma.SortOrder = Prisma.SortOrder.asc;
 
     @ApiPropertyOptional({
         minimum: 1,
