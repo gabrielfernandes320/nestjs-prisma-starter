@@ -1,9 +1,9 @@
-import CreateUserService from './CreateUserService';
 import { Test, TestingModule } from '@nestjs/testing';
 import {
     CreateUserDtoMock,
     mockUsersRepository,
 } from '../mocks/UserMockFactory';
+import CreateUserService from './CreateUserService';
 
 describe('CreateUserService', () => {
     let service: CreateUserService;
@@ -25,9 +25,12 @@ describe('CreateUserService', () => {
 
     describe('createUserService', () => {
         it('should create a user in database and return the user', async () => {
+            const { roles, ...rest } = mockUserDto;
+
             expect(await service.execute(mockUserDto)).toEqual({
                 id: 1,
-                ...mockUserDto,
+                roles: roles,
+                ...rest,
             });
         });
     });

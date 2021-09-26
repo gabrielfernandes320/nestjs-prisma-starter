@@ -1,10 +1,11 @@
+import { Prisma, User } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
-import ListUserDTO from '../../../dtos/ListUserDTO';
+import hashPassword from '../../../../../shared/utils/hashPassword';
 import { PrismaService } from '../../../../database/services/PrismaService';
-import { User, Prisma } from '.prisma/client';
+import ListUserDTO from '../../../dtos/ListUserDTO';
+import EmailAlreadyExistsException from '../../../exceptions/EmailAlreadyExistsException';
 import UserNotFoundException from '../../../exceptions/UserNotFoundException';
 import IUsersRepository from '../../../repositories/IUsersRepository';
-import hashPassword from '../../../../../shared/utils/hashPassword';
 
 @Injectable()
 export class UsersRepository implements IUsersRepository {
@@ -16,6 +17,7 @@ export class UsersRepository implements IUsersRepository {
             skip: perPage * (page - 1),
             take: perPage,
             orderBy: { id: order },
+            where: search ? { email: { contains: search } } : {},
         });
     }
 
@@ -41,6 +43,12 @@ export class UsersRepository implements IUsersRepository {
     }
 
     public async create(data: Prisma.UserCreateInput): Promise<User> {
+        const emailAlreadyExist = await this.findByEmail(data.email);
+
+        if (emailAlreadyExist) {
+            throw new EmailAlreadyExistsException(data.email);
+        }
+
         data.password = await hashPassword(data.password);
 
         return await this.prisma.user.create({ data });

@@ -1,11 +1,9 @@
-import { plainToClass } from 'class-transformer';
+import { Prisma, User } from '@prisma/client';
 import * as Factory from 'factory.ts';
-import { name, internet, datatype } from 'faker';
-import { RoleMock } from '../../roles/mocks/RoleMockFactory';
+import { datatype, internet, name } from 'faker';
 import CreateUserDTO from '../dtos/CreateUserDTO';
-import UpdateUserDTO from '../dtos/UpdateUserDTO';
 import ListUserDTO from '../dtos/ListUserDTO';
-import { User } from '@prisma/client';
+import UpdateUserDTO from '../dtos/UpdateUserDTO';
 
 export const UserMock = Factory.Sync.makeFactory<User>({
     id: Factory.each((i) => i),
@@ -41,7 +39,15 @@ export const UpdateUserDtoMock = Factory.Sync.makeFactory<UpdateUserDTO>({
 export const mockUsersList = UserMock.buildList(10);
 
 export const mockUsersRepository = {
-    create: jest.fn((createUserDTO: CreateUserDTO) => createUserDTO),
+    create: jest.fn((createUserDTO: Prisma.UserCreateInput) => {
+        const { roles, ...rest } = createUserDTO;
+
+        return {
+            id: 1,
+            roles: { connect: roles },
+            ...rest,
+        };
+    }),
     remove: jest.fn(async (id: number) => {
         id = id;
     }),

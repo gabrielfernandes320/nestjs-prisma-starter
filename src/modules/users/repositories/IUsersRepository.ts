@@ -1,4 +1,4 @@
-import { User, Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import ListUserDTO from '../dtos/ListUserDTO';
 export default interface IUsersRepository {
     findAll(params: ListUserDTO): Promise<any>;
