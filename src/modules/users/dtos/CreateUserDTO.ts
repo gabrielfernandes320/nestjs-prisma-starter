@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-    IsBoolean,
-    IsEmail,
-    IsNotEmpty,
-    IsString,
-    Matches,
-} from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export default class CreateUserDTO {
     @IsNotEmpty()
@@ -23,9 +17,6 @@ export default class CreateUserDTO {
     public roles: [{ id: number }];
 
     @IsNotEmpty()
-    @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-        message: 'password too weak',
-    })
     @ApiProperty()
     public password: string;
 
