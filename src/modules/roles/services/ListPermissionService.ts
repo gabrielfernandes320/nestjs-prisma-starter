@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Permission } from '@prisma/client';
 import ListPermissionDTO from '../dtos/ListPermissionDTO';
-import { Permission } from '../infra/typeorm/entities/PermissionEntity';
 import IPermissionsRepository from '../repositories/IPermissionsRepository';
 
 @Injectable()

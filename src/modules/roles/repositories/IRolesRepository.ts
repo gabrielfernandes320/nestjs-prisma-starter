@@ -1,4 +1,13 @@
-import { Role } from '../infra/typeorm/entities/RoleEntity';
-import IBaseRepository from '../../../shared/repositories/IBaseRepository';
+import { Prisma, Role } from '@prisma/client';
+import ListRoleDTO from '../dtos/ListRoleDTO';
+export default interface IRolesRepository {
+    findAll(params: ListRoleDTO): Promise<any>;
 
-export default interface IRolesRepository extends IBaseRepository<Role> {}
+    findById(id: number): Promise<Role | null>;
+
+    remove(id: number): Promise<void>;
+
+    create(data: Prisma.RoleCreateInput): Promise<Role>;
+
+    update(id: number, data: Prisma.RoleUpdateInput): Promise<Role>;
+}

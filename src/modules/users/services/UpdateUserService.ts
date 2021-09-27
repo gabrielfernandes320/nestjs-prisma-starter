@@ -1,8 +1,7 @@
-import { plainToClass } from 'class-transformer';
-import UpdateUserDTO from '../dtos/UpdateUserDTO';
 import { Inject, Injectable } from '@nestjs/common';
-import IUsersRepository from '../repositories/IUsersRepository';
 import { User } from '@prisma/client';
+import UpdateUserDTO from '../dtos/UpdateUserDTO';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 @Injectable()
 export default class UpdateUserService {
@@ -15,6 +14,11 @@ export default class UpdateUserService {
             user.password = undefined;
         }
 
-        return await this.usersRepository.update(id, user);
+        const { roles, ...rest } = user;
+
+        return await this.usersRepository.update(id, {
+            ...rest,
+            roles: { connect: roles },
+        });
     }
 }

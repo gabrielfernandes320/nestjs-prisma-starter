@@ -1,4 +1,4 @@
-import { Permission } from '../infra/typeorm/entities/PermissionEntity';
+import { Permission } from '@prisma/client';
 import * as Factory from 'factory.ts';
 
 export const PermissionMock = Factory.Sync.makeFactory<Permission>({
@@ -10,6 +10,4 @@ export const PermissionMock = Factory.Sync.makeFactory<Permission>({
     reference: 'LIST:USERS',
     resource: 'user',
     updatedAt: new Date(),
-    setCreated: () => {},
-    setUpdatedAt: () => {},
 });

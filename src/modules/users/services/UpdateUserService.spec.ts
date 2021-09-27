@@ -1,13 +1,11 @@
-import DeleteUserService from './DeleteUserService';
 import { Test, TestingModule } from '@nestjs/testing';
+import { plainToClass } from 'class-transformer';
 import {
-    UpdateUserDtoMock,
-    mockUsersRepository,
     mockUsersList,
+    mockUsersRepository,
+    UpdateUserDtoMock,
 } from '../mocks/UserMockFactory';
 import UpdateUserService from './UpdateUserService';
-import { plainToClass } from 'class-transformer';
-import { User } from '../infra/typeorm/entities/UserEntity';
 
 describe('DeleteUserService', () => {
     let service: UpdateUserService;

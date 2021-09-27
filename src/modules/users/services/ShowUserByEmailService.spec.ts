@@ -1,11 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-    UpdateUserDtoMock,
-    mockUsersRepository,
-    mockUsersList,
-} from '../mocks/UserMockFactory';
-import { plainToClass } from 'class-transformer';
-import { User } from '../infra/typeorm/entities/UserEntity';
+import { mockUsersList, mockUsersRepository } from '../mocks/UserMockFactory';
 import ShowUserByEmailService from './ShowUserByEmailService';
 
 describe('ShowUserByEmailService', () => {
@@ -28,8 +22,11 @@ describe('ShowUserByEmailService', () => {
     describe('ShowUserByEmailService', () => {
         it('should return a user', async () => {
             expect(await service.execute(mockUsersList[0].email)).toEqual(
-                plainToClass(User, mockUsersList[0]),
+                mockUsersList[0],
             );
         });
     });
 });
+function User(User: any, arg1: User): unknown {
+    throw new Error('Function not implemented.');
+}

@@ -1,21 +1,21 @@
-import UpdateRoleDTO from 'src/modules/roles/dtos/UpdateRoleDTO';
+import { Test } from '@nestjs/testing';
+import { Role } from '@prisma/client';
+import { datatype } from 'faker';
 import CreateRoleDTO from 'src/modules/roles/dtos/CreateRoleDTO';
+import UpdateRoleDTO from 'src/modules/roles/dtos/UpdateRoleDTO';
+import JwtAuthenticationGuard from '../../../auth/guards/JwtAuthenticationGuard';
+import ListRolesDTO from '../../dtos/ListRoleDTO';
 import {
-    RoleMock,
     CreateRoleDtoMock,
+    RoleMock,
     UpdateRoleDtoMock,
 } from '../../mocks/RoleMockFactory';
-import { RolesController } from './RolesController';
-import ListRoleService from '../../services/ListRoleService';
-import { Role } from '../typeorm/entities/RoleEntity';
-import { Test } from '@nestjs/testing';
-import JwtAuthenticationGuard from '../../../auth/guards/JwtAuthenticationGuard';
 import CreateRoleService from '../../services/CreateRoleService';
-import UpdateRoleService from '../../services/UpdateRoleService';
 import DeleteRoleService from '../../services/DeleteRoleService';
+import ListRoleService from '../../services/ListRoleService';
 import ShowRoleService from '../../services/ShowRoleService';
-import { datatype } from 'faker';
-import ListRolesDTO from '../../dtos/ListRoleDTO';
+import UpdateRoleService from '../../services/UpdateRoleService';
+import { RolesController } from './RolesController';
 
 describe('RolesController', () => {
     let rolesController: RolesController;

@@ -1,13 +1,11 @@
-import ListUserService from './ListUserService';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-    UpdateUserDtoMock,
-    mockUsersRepository,
-    mockUsersList,
-} from '../mocks/UserMockFactory';
-import { plainToClass } from 'class-transformer';
-import { User } from '../infra/typeorm/entities/UserEntity';
 import ListUserDTO from '../dtos/ListUserDTO';
+import {
+    mockUsersList,
+    mockUsersRepository,
+    UpdateUserDtoMock,
+} from '../mocks/UserMockFactory';
+import ListUserService from './ListUserService';
 
 describe('ListUserService', () => {
     let service: ListUserService;

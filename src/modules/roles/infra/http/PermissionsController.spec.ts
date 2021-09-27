@@ -1,11 +1,8 @@
-import { PermissionMock } from '../../mocks/PermissionMockFactory';
-import { PermissionsController } from './PermissionsController';
-import ListPermissionService from '../../services/ListPermissionService';
-import { Permission } from '../typeorm/entities/PermissionEntity';
-import ListPermissionDTO from '../../dtos/ListPermissionDTO';
 import { Test } from '@nestjs/testing';
-import { Controller } from '@nestjs/common';
-import { string } from '@hapi/joi';
+import { Permission } from '@prisma/client';
+import { PermissionMock } from '../../mocks/PermissionMockFactory';
+import ListPermissionService from '../../services/ListPermissionService';
+import { PermissionsController } from './PermissionsController';
 
 describe('PermissionsController', () => {
     let permissionsController: PermissionsController;

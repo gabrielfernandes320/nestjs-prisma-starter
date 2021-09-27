@@ -11,5 +11,5 @@ export default class CreateRoleDTO {
     public reference: string;
 
     @IsNotEmpty()
-    public permissions: { id: string | number }[];
+    public permissions: Array<{ id: number }>;
 }

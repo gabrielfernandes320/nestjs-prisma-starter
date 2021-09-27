@@ -62,13 +62,7 @@ $ npm run test:cov
 
 ```bash
 # run migration
-$ npm run typeorm -- migration:run
 
-# create migration
-$ npm run typeorm -- migration:create -n <migration_name>
-
-# revert migration
-$ npm run typeorm -- migration:revert
 
 ## Support
 

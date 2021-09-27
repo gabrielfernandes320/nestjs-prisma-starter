@@ -1,13 +1,10 @@
-import ShowUserService from './ShowUserService';
 import { Test, TestingModule } from '@nestjs/testing';
 import {
-    UpdateUserDtoMock,
-    mockUsersRepository,
     mockUsersList,
+    mockUsersRepository,
+    UpdateUserDtoMock,
 } from '../mocks/UserMockFactory';
-import UpdateUserService from './UpdateUserService';
-import { plainToClass } from 'class-transformer';
-import { User } from '../infra/typeorm/entities/UserEntity';
+import ShowUserService from './ShowUserService';
 
 describe('ShowUserService', () => {
     let service: ShowUserService;
@@ -30,7 +27,7 @@ describe('ShowUserService', () => {
     describe('showUserService', () => {
         it('should return a user', async () => {
             expect(await service.execute(+mockUsersList[0].id)).toEqual(
-                plainToClass(User, mockUsersList[0]),
+                mockUsersList[0],
             );
         });
     });

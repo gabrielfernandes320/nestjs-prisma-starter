@@ -1,5 +1,5 @@
-import { PermissionsRepository } from './infra/typeorm/repositories/PermissionsRepository';
-import { RolesRepository } from './infra/typeorm/repositories/RolesRepository';
+import { PermissionsRepository } from './infra/prisma/repositories/PermissionsRepository';
+import { RolesRepository } from './infra/prisma/repositories/RolesRepository';
 
 export const providers = [
     { provide: 'RolesRepository', useClass: RolesRepository },

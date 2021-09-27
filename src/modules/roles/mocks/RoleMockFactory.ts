@@ -1,8 +1,7 @@
-import UpdateRoleDTO from '../dtos/UpdateRoleDTO';
-import CreateRoleDTO from '../dtos/CreateRoleDTO';
-import { PermissionMock } from './PermissionMockFactory';
-import { Role } from '../infra/typeorm/entities/RoleEntity';
+import { Role } from '@prisma/client';
 import * as Factory from 'factory.ts';
+import CreateRoleDTO from '../dtos/CreateRoleDTO';
+import UpdateRoleDTO from '../dtos/UpdateRoleDTO';
 
 export const RoleMock = Factory.Sync.makeFactory<Role>({
     id: Factory.each((i) => i),
@@ -12,14 +11,12 @@ export const RoleMock = Factory.Sync.makeFactory<Role>({
     deletedAt: null,
     reference: 'ADMINISTRATOR',
     updatedAt: new Date(),
-    permissions: PermissionMock.buildList(2),
-    setCreated: () => {},
-    setUpdatedAt: () => {},
 });
 
 export const CreateRoleDtoMock = Factory.Sync.makeFactory<CreateRoleDTO>({
     name: 'Admin',
     reference: 'ADMINISTRATOR',
+    enabled: true,
     permissions: [{ id: 1 }, { id: 2 }],
 });
 

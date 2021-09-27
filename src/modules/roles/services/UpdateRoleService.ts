@@ -1,8 +1,7 @@
-import UpdateRoleDTO from '../dtos/UpdateRoleDTO';
 import { Inject, Injectable } from '@nestjs/common';
-import { Role } from '../infra/typeorm/entities/RoleEntity';
+import { Role } from '@prisma/client';
+import UpdateRoleDTO from '../dtos/UpdateRoleDTO';
 import IRolesRepository from '../repositories/IRolesRepository';
-import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export default class UpdateRoleService {
@@ -11,6 +10,11 @@ export default class UpdateRoleService {
     ) {}
 
     public async execute(id: number, role: UpdateRoleDTO): Promise<Role> {
-        return await this.rolesRepository.update(id, plainToClass(Role, role));
+        const { permissions, ...rest } = role;
+
+        return await this.rolesRepository.update(id, {
+            ...rest,
+            permissions: { connect: permissions },
+        });
     }
 }

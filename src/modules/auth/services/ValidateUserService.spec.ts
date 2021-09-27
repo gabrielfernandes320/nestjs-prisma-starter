@@ -1,14 +1,8 @@
-import { UsersRepository } from './../../users/infra/typeorm/repositories/UsersRepository';
-import UpdateRoleDTO from 'src/modules/roles/dtos/UpdateRoleDTO';
-import CreateRoleDTO from 'src/modules/roles/dtos/CreateRoleDTO';
-import ValidateUserService from './ValidateUserService';
-import { Repository } from 'typeorm';
-import { User } from '../../users/infra/typeorm/entities/UserEntity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
+import hashComparePassword from '../../../shared/utils/hashComparePassword';
 import { UserMock } from '../../users/mocks/UserMockFactory';
 import LoginDTO from '../dtos/LoginDTO';
-import hashComparePassword from '../../../shared/utils/hashComparePassword';
+import ValidateUserService from './ValidateUserService';
 
 describe('ValidateUserService', () => {
     let service: ValidateUserService;

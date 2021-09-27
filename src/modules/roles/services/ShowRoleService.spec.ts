@@ -1,8 +1,6 @@
-import { Role } from '../../roles/infra/typeorm/entities/RoleEntity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
-import ShowRoleService from './ShowRoleService';
 import { RoleMock } from '../mocks/RoleMockFactory';
+import ShowRoleService from './ShowRoleService';
 
 describe('ShowRoleService', () => {
     let service: ShowRoleService;

@@ -1,10 +1,8 @@
+import { INestApplication } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
+import * as request from 'supertest';
 import { UserMock } from './../src/modules/users/mocks/UserMockFactory';
 import { UsersModule } from './../src/modules/users/UsersModule';
-import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../src/modules/users/infra/typeorm/entities/UserEntity';
 
 describe('UsersController (e2e)', () => {
     let app: INestApplication;
@@ -22,8 +20,8 @@ describe('UsersController (e2e)', () => {
         const moduleFixture = await Test.createTestingModule({
             imports: [UsersModule],
         })
-            .overrideProvider(getRepositoryToken(User))
-            .useValue(mockUsersRepository)
+            // .overrideProvider(getRepositoryToken(User))
+            // .useValue(mockUsersRepository)
             .compile();
 
         app = moduleFixture.createNestApplication();

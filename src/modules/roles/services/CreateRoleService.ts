@@ -1,8 +1,7 @@
-import CreateRoleDto from '../dtos/CreateRoleDTO';
 import { Inject, Injectable } from '@nestjs/common';
-import { Role } from '../infra/typeorm/entities/RoleEntity';
+import { Role } from '@prisma/client';
+import CreateRoleDto from '../dtos/CreateRoleDTO';
 import IRolesRepository from '../repositories/IRolesRepository';
-import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export default class CreateRoleService {
@@ -11,6 +10,11 @@ export default class CreateRoleService {
     ) {}
 
     public async execute(role: CreateRoleDto): Promise<Role> {
-        return await this.rolesRepository.create(plainToClass(Role, role));
+        const { permissions, ...rest } = role;
+
+        return await this.rolesRepository.create({
+            ...rest,
+            permissions: { connect: permissions },
+        });
     }
 }
